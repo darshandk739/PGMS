@@ -1,5 +1,9 @@
 package com.ty.pgboot_app.pg_app.repo;
 
-public interface PGDetailsRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.ty.pgboot_app.pg_app.dto.PGDetails;
+
+public interface  PGDetailsRepository extends JpaRepository<PGDetails, Integer>{
 
 }
