@@ -69,13 +69,13 @@ public class PGDetails {
 		return status;
 	}
 
-	public void setStatus(String status) {
+	public  void setStatus(String status) {
 		this.status = status;
 	}
 
 	public String getPgFacilities() {
 		return PgFacilities;
-	}
+	}    
 
 	public void setPgFacilities(String pgFacilities) {
 		PgFacilities = pgFacilities;
