@@ -1,5 +1,9 @@
 package com.ty.pgboot_app.pg_app.repo;
 
-public interface AdminRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.ty.pgboot_app.pg_app.dto.Admin;
+
+public interface AdminRepository extends JpaRepository<Admin, Integer>{
 
 }
