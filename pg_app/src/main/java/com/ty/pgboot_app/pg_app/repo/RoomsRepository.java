@@ -1,5 +1,9 @@
 package com.ty.pgboot_app.pg_app.repo;
 
-public interface RoomsRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.ty.pgboot_app.pg_app.dto.Rooms;
+
+public interface RoomsRepository extends JpaRepository<Rooms, Integer>{
 
 }
