@@ -20,7 +20,7 @@ public class PGDetailsService {
 	@Autowired
 	PGDetailsDao dao;
 
-	public ResponseEntity<ResponseStructure<PGDetails>> savePGDetails(PGDetails pgDetails) {
+	public ResponseEntity<ResponseStructure<PGDetails>> savePGDetails(PGDetails  pgDetails) {
 		ResponseStructure<PGDetails> responseStructure = new ResponseStructure<PGDetails>();
 		ResponseEntity<ResponseStructure<PGDetails>> responseEntity = new ResponseEntity<ResponseStructure<PGDetails>>(
 				responseStructure, HttpStatus.OK);
