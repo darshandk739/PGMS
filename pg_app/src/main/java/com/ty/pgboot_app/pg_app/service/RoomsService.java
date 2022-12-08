@@ -37,7 +37,6 @@ public class RoomsService {
 		ResponseEntity<ResponseStructure<Rooms>> responseEntity = new ResponseEntity<ResponseStructure<Rooms>>(responseStructure,HttpStatus.OK);
 		Optional<Rooms> rooms2 = roomsDao.getRoomsById(id);
 		if(rooms2!=null) {
-			rooms.setRoomsId(id);
 			responseStructure.setStatus(HttpStatus.OK.value());
 			responseStructure.setMessage("Updated");
 			responseStructure.setData(roomsDao.updateRooms(rooms));
