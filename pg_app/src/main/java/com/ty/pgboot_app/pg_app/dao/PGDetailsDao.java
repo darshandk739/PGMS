@@ -21,16 +21,13 @@ public class PGDetailsDao {
 		return repository.save(pgDetails);
 	}
 	
-	public PGDetails getPGDetailsById(int id) {
-		Optional<PGDetails> optional = repository.findById(id);
-		if(optional.isEmpty()) {
-			return null;
-		}
-		return optional.get();
+	public Optional<PGDetails> getPGDetailsById(int id) {
+	return repository.findById(id);
+	
 	}
 	
-	public String deletePGDetailsById(int id) {
-		repository.deleteById(id);
-		return "Deleted";
+	public void deletePGDetails(PGDetails pgDetails) {
+		repository.delete(pgDetails);
+		
 	}
 }
