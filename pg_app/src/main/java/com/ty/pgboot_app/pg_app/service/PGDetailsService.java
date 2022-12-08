@@ -45,7 +45,7 @@ public class PGDetailsService {
 		throw new UnableToUpdateException();
 	}
 
-	public ResponseEntity<ResponseStructure<PGDetails>> getPGDetails(PGDetails pgDetails, int id) {
+	public ResponseEntity<ResponseStructure<PGDetails>> getPGDetails(int id) {
 		Optional<PGDetails> optional = dao.getPGDetailsById(id);
 		ResponseStructure<PGDetails> responseStructure = new ResponseStructure<PGDetails>();
 		ResponseEntity<ResponseStructure<PGDetails>> responseEntity = new ResponseEntity<ResponseStructure<PGDetails>>(
@@ -53,7 +53,7 @@ public class PGDetailsService {
 		if (optional.isPresent()) {
 			responseStructure.setStatus(HttpStatus.OK.value());
 			responseStructure.setMessage("Retrieved");
-			responseStructure.setData(dao.getPGDetailsById(id).get());
+			responseStructure.setData(optional.get());
 
 			return responseEntity;
 		}
@@ -69,7 +69,7 @@ public class PGDetailsService {
 			dao.deletePGDetails(optional.get());
 			responseStructure.setStatus(HttpStatus.OK.value());
 			responseStructure.setMessage("Deleted");
-			responseStructure.setData(dao.savePGDetails(optional.get()));
+			responseStructure.setData(optional.get());
 
 			return responseEntity;
 		}

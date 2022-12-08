@@ -35,7 +35,6 @@ public class RoomsService {
 				responseStructure, HttpStatus.OK);
 		Optional<Rooms> rooms2 = roomsDao.getRoomsById(id);
 		if (rooms2 != null) {
-			rooms.setRoomsId(id);
 			responseStructure.setStatus(HttpStatus.OK.value());
 			responseStructure.setMessage("Rooms Updated");
 			responseStructure.setData(roomsDao.updateRooms(rooms));
@@ -48,11 +47,11 @@ public class RoomsService {
 		ResponseStructure<Rooms> responseStructure = new ResponseStructure<Rooms>();
 		ResponseEntity<ResponseStructure<Rooms>> responseEntity = new ResponseEntity<ResponseStructure<Rooms>>(
 				responseStructure, HttpStatus.OK);
-		Optional<Rooms> rooms2 = roomsDao.getRoomsById(id);
-		if (rooms2 != null) {
+		Optional<Rooms> optional = roomsDao.getRoomsById(id);
+		if (optional.isPresent()) {
 			responseStructure.setStatus(HttpStatus.OK.value());
 			responseStructure.setMessage("Get Rooms");
-			responseStructure.setData(roomsDao.getRoomsById(id).get());
+			responseStructure.setData(optional.get());
 			return responseEntity;
 		}
 		throw new NoSuchIdFoundException("no such id found in database");
@@ -63,7 +62,7 @@ public class RoomsService {
 		ResponseEntity<ResponseStructure<Rooms>> responseEntity = new ResponseEntity<ResponseStructure<Rooms>>(
 				responseStructure, HttpStatus.OK);
 		Optional<Rooms> optional = roomsDao.getRoomsById(id);
-		if (optional != null) {
+		if (optional.isPresent()) {
 			roomsDao.deleteRooms(optional.get());
 			responseStructure.setStatus(HttpStatus.OK.value());
 			responseStructure.setMessage("Rooms Deleted");

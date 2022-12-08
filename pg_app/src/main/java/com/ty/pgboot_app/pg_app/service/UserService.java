@@ -34,7 +34,6 @@ public class UserService {
 		ResponseEntity<ResponseStructure<User>> responseEntity = new ResponseEntity<ResponseStructure<User>>(
 				responseStructure, HttpStatus.OK);
 		if(optional.isPresent()) {
-			user.setUserId(id);
 		responseStructure.setStatus(HttpStatus.OK.value());
 		responseStructure.setMessage("Updated");
 		responseStructure.setData(userDao.updateUser(user));
@@ -51,7 +50,7 @@ public class UserService {
 		if(optional.isPresent()) {
 			responseStructure.setStatus(HttpStatus.OK.value());
 			responseStructure.setMessage("User Found");
-			responseStructure.setData(userDao.getUserById(id).get());
+			responseStructure.setData(optional.get());
 			return responseEntity;
 		}
 		throw new NoSuchIdFoundException();
