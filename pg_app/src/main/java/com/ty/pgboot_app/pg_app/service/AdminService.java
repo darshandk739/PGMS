@@ -34,7 +34,6 @@ public class AdminService {
 		ResponseEntity<ResponseStructure<Admin>> responseEntity = new ResponseEntity<ResponseStructure<Admin>>(
 				responseStructure, HttpStatus.OK);
 		if (admin2.isPresent()) {
-			admin.setAdminId(id);
 			responseStructure.setStatus(HttpStatus.OK.value());
 			responseStructure.setMessage("Updated");
 			responseStructure.setData(adminDao.updateAdmin(admin));
@@ -51,7 +50,7 @@ public class AdminService {
 		if (optional.isPresent()) {
 			responseStructure.setStatus(HttpStatus.OK.value());
 			responseStructure.setMessage("Recieved");
-			responseStructure.setData(adminDao.getAdminById(id).get());
+			responseStructure.setData(optional.get());
 			return responseEntity;
 		}
 		throw new NoSuchIdFoundException();
