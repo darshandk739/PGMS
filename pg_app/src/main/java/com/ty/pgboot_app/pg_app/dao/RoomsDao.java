@@ -14,20 +14,17 @@ public class RoomsDao {
 	public Rooms saveRooms(Rooms rooms) {
 		return roomsRepository.save(rooms);
 	}
+	
 	public Rooms updateRooms(Rooms rooms) {
 		return roomsRepository.save(rooms);
 	}
 
-	public Rooms getRoomsById(int id) {
-		Optional<Rooms> optional = roomsRepository.findById(id);
-		if(optional.isEmpty()) {
-			return null;
-		}
-		return optional.get();
+	public Optional<Rooms> getRoomsById(int id) {
+		 return roomsRepository.findById(id);
+		
 	}
-
-	public String deleteRoomsById(int id) {
+	
+	public void deleteRoomsById(int id) {
 		roomsRepository.deleteById(id);
-		return "deleted";
 	}
 }
