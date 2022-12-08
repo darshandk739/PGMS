@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.ty.pgboot_app.pg_app.dao.RoomsDao;
 import com.ty.pgboot_app.pg_app.dto.Rooms;
 import com.ty.pgboot_app.pg_app.exception.NoSuchIdFoundException;
+import com.ty.pgboot_app.pg_app.exception.UnableToDeleteException;
 import com.ty.pgboot_app.pg_app.util.ResponseStructure;
 
 @Service
@@ -47,6 +48,34 @@ public class RoomsService {
 		return responseEntity;
 		
 		
+	}
+	public ResponseEntity<ResponseStructure<Rooms>> getRoomsById(int id) {
+		ResponseStructure<Rooms> responseStructure = new ResponseStructure<Rooms>();
+		ResponseEntity<ResponseStructure<Rooms>> responseEntity = new ResponseEntity<ResponseStructure<Rooms>>(
+				responseStructure, HttpStatus.OK);
+		Optional<Rooms> optional = roomsDao.getRoomsById(id);
+		if (optional.isPresent()) {
+			responseStructure.setStatus(HttpStatus.OK.value());
+			responseStructure.setMessage("Get Rooms");
+			responseStructure.setData(optional.get());
+			return responseEntity;
+		}
+		throw new NoSuchIdFoundException("no such id found in database");
+	}
+
+	public ResponseEntity<ResponseStructure<Rooms>> deleteRoomsById(int id) {
+		ResponseStructure<Rooms> responseStructure = new ResponseStructure<Rooms>();
+		ResponseEntity<ResponseStructure<Rooms>> responseEntity = new ResponseEntity<ResponseStructure<Rooms>>(
+				responseStructure, HttpStatus.OK);
+		Optional<Rooms> optional = roomsDao.getRoomsById(id);
+		if (optional.isPresent()) {
+			roomsDao.deleteRooms(optional.get());
+			responseStructure.setStatus(HttpStatus.OK.value());
+			responseStructure.setMessage("Rooms Deleted");
+			responseStructure.setData(optional.get());
+			return responseEntity;
+		}
+		throw new UnableToDeleteException("no such id found in database to delete");
 	}
 	
 	
