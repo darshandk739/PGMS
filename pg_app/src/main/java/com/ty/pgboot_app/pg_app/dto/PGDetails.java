@@ -24,7 +24,7 @@ public class PGDetails {
 	private String pgLocation;
 	private long pgPhone;
 	private String status;
-	private String PgFacilities;
+	private String pgFacilities;
 	private String pgFoods;
 
 	@OneToMany
