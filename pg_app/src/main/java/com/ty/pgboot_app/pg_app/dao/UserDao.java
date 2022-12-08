@@ -21,15 +21,11 @@ public class UserDao {
 		return userRepository.save(user);
 	}
 	
-	public User getUserById(int id) {
-		Optional<User> optional = userRepository.findById(id);
-		if(optional.isPresent()) {
-			return optional.get();
-		}
-		return null;
+	public Optional<User> getUserById(int id) {
+		return userRepository.findById(id);	
 	}
-	public String deleteUserById(int id) {
-		userRepository.deleteById(id);
-		return "Deleted";
+	
+	public void deleteUser(User user) {
+		userRepository.delete(user);
 	}
 }
