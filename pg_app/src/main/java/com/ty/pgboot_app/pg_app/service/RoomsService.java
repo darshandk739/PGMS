@@ -15,7 +15,7 @@ import com.ty.pgboot_app.pg_app.util.ResponseStructure;
 @Service
 public class RoomsService {
 	@Autowired
-	
+	   
 	private RoomsDao roomsDao;
 	
 	public ResponseEntity<ResponseStructure<Rooms>> saveRooms(Rooms rooms){
@@ -41,7 +41,7 @@ public class RoomsService {
 			responseStructure.setMessage("Updated");
 			responseStructure.setData(roomsDao.updateRooms(rooms));
 		}else {
-			throw new NoSuchIdFoundException("no such id found in database") ;
+			throw new NoSuchIdFoundException("no such id found in database to update") ;
 		}
 		
 		return responseEntity;
