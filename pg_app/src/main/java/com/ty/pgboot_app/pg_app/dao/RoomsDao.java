@@ -24,7 +24,7 @@ public class RoomsDao {
 		
 	}
 	
-	public void deleteRoomsById(int id) {
-		roomsRepository.deleteById(id);
+	public void deleteRooms(Rooms rooms) {
+		roomsRepository.delete(rooms);
 	}
 }
