@@ -7,7 +7,9 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ty.pgboot_app.pg_app.dto.Rooms;
@@ -31,7 +33,7 @@ public class RoomsController {
 
 	@PostMapping(consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE }, produces = {
 			MediaType.APPLICATION_JSON_VALUE })
-	public ResponseEntity<ResponseStructure<Rooms>> saveRooms(Rooms rooms) {
+	public ResponseEntity<ResponseStructure<Rooms>> saveRooms(@RequestBody Rooms rooms) {
 		return roomService.saveRooms(rooms);
 	}
 
@@ -41,7 +43,7 @@ public class RoomsController {
 
 	@PutMapping(consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE }, produces = {
 			MediaType.APPLICATION_JSON_VALUE })
-	public ResponseEntity<ResponseStructure<Rooms>> updateRooms(Rooms rooms, int id) {
+	public ResponseEntity<ResponseStructure<Rooms>> updateRooms(@RequestBody Rooms rooms,@RequestParam int id) {
 		return roomService.updateRooms(rooms, id);
 	}
 
@@ -49,7 +51,7 @@ public class RoomsController {
 	@ApiResponses(value = { @ApiResponse(code = 500, message = "Internal Server Error"),
 			@ApiResponse(code = 404, message = "NotFound") })
 	@GetMapping(produces = { MediaType.APPLICATION_JSON_VALUE })
-	public ResponseEntity<ResponseStructure<Rooms>> getRooms(int id) {
+	public ResponseEntity<ResponseStructure<Rooms>> getRooms(@RequestParam int id) {
 		return roomService.getRoomsById(id);
 	}
 
@@ -57,7 +59,7 @@ public class RoomsController {
 	@ApiResponses(value = { @ApiResponse(code = 500, message = "Internal Server Error"),
 			@ApiResponse(code = 404, message = "NotFound") })
 	@DeleteMapping(produces = { MediaType.APPLICATION_JSON_VALUE })
-	public ResponseEntity<ResponseStructure<Rooms>> deleteRooms(int id) {
+	public ResponseEntity<ResponseStructure<Rooms>> deleteRooms(@RequestParam int id) {
 		return roomService.deleteRoomsById(id);
 	}
 }
