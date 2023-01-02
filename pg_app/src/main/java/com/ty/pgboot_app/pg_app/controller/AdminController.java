@@ -23,6 +23,7 @@ import io.swagger.annotations.ApiResponses;
 @RestController
 @RequestMapping("admin")
 public class AdminController {
+	
 	@Autowired
 	private AdminService adminService;
 	
@@ -59,7 +60,7 @@ public class AdminController {
 	@ApiResponses(value = {
 			@ApiResponse(code = 500, message = "Internal Server Error"),
 			@ApiResponse(code = 404, message = "Not Found")})
-	@DeleteMapping(produces = {MediaType.APPLICATION_JSON_VALUE})
+	@DeleteMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<ResponseStructure<Admin>> deleteAdmin(@RequestParam int id){
 		return adminService.deleteAdmin(id);
 	}

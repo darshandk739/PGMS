@@ -1,6 +1,5 @@
 package com.ty.pgboot_app.pg_app.exception;
 
-import javax.print.DocFlavor.READER;
 
 public class NoSuchIdFoundException extends RuntimeException{
 	private String message ="No such id found in database";

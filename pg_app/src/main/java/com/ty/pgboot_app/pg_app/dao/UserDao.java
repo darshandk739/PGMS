@@ -1,5 +1,6 @@
 package com.ty.pgboot_app.pg_app.dao;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,5 +28,9 @@ public class UserDao {
 	
 	public void deleteUser(User user) {
 		userRepository.delete(user);
+	}
+	
+	public List<User> getAllUsers() {
+		return userRepository.findAll();
 	}
 }
