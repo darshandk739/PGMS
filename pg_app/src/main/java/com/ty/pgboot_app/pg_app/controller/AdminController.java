@@ -25,42 +25,40 @@ import io.swagger.annotations.ApiResponses;
 public class AdminController {
 	@Autowired
 	private AdminService adminService;
-	
+
 	@ApiOperation(value = "SaveAdmin", notes = "It is used to Save the Admin")
-	@ApiResponses(value = {@ApiResponse(code = 201, message = "Created"),
+	@ApiResponses(value = { @ApiResponse(code = 201, message = "Created"),
 			@ApiResponse(code = 500, message = "Internal Server Error"),
-			@ApiResponse(code = 404, message = "Not Found")})
-	@PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
-	produces = {MediaType.APPLICATION_JSON_VALUE})
-	public ResponseEntity<ResponseStructure<Admin>> saveAdmin(@RequestBody Admin admin){
+			@ApiResponse(code = 404, message = "Not Found") })
+	@PostMapping(consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE }, produces = {
+			MediaType.APPLICATION_JSON_VALUE })
+	public ResponseEntity<ResponseStructure<Admin>> saveAdmin(@RequestBody Admin admin) {
 		return adminService.saveAdmin(admin);
 	}
-	
+
 	@ApiOperation(value = "UpdateAdmin", notes = "It is used to Update the Admin")
-	@ApiResponses(value = {@ApiResponse(code = 201, message = "Created"),
+	@ApiResponses(value = { @ApiResponse(code = 201, message = "Created"),
 			@ApiResponse(code = 500, message = "Internal Server Error"),
-			@ApiResponse(code = 404, message = "Not Found")})
-	@PutMapping(consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
-			produces = {MediaType.APPLICATION_JSON_VALUE})
-	public ResponseEntity<ResponseStructure<Admin>> updateAdmin(@RequestBody Admin admin, @RequestParam int id){
+			@ApiResponse(code = 404, message = "Not Found") })
+	@PutMapping(consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE }, produces = {
+			MediaType.APPLICATION_JSON_VALUE })
+	public ResponseEntity<ResponseStructure<Admin>> updateAdmin(@RequestBody Admin admin, @RequestParam int id) {
 		return adminService.updateAdmin(admin, id);
 	}
-	
+
 	@ApiOperation(value = "GetAdmin", notes = "It is used to Get the Admin")
-	@ApiResponses(value = {
-			@ApiResponse(code = 500, message = "Internal Server Error"),
-			@ApiResponse(code = 404, message = "Not Found")})
-	@GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE})
-	public ResponseEntity<ResponseStructure<Admin>> getAdminById(@RequestParam int id){
+	@ApiResponses(value = { @ApiResponse(code = 500, message = "Internal Server Error"),
+			@ApiResponse(code = 404, message = "Not Found") })
+	@GetMapping(produces = { MediaType.APPLICATION_JSON_VALUE })
+	public ResponseEntity<ResponseStructure<Admin>> getAdminById(@RequestParam int id) {
 		return adminService.getAdminById(id);
 	}
-	
+
 	@ApiOperation(value = "DeleteAdmin", notes = "It is used to Delete the Admin")
-	@ApiResponses(value = {
-			@ApiResponse(code = 500, message = "Internal Server Error"),
-			@ApiResponse(code = 404, message = "Not Found")})
-	@DeleteMapping(produces = {MediaType.APPLICATION_JSON_VALUE})
-	public ResponseEntity<ResponseStructure<Admin>> deleteAdmin(@RequestParam int id){
+	@ApiResponses(value = { @ApiResponse(code = 500, message = "Internal Server Error"),
+			@ApiResponse(code = 404, message = "Not Found") })
+	@DeleteMapping(produces = { MediaType.APPLICATION_JSON_VALUE })
+	public ResponseEntity<ResponseStructure<Admin>> deleteAdmin(@RequestParam int id) {
 		return adminService.deleteAdmin(id);
 	}
 }

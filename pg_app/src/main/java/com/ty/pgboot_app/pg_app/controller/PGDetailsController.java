@@ -1,5 +1,7 @@
 package com.ty.pgboot_app.pg_app.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 
 import com.ty.pgboot_app.pg_app.dto.PGDetails;
 import com.ty.pgboot_app.pg_app.service.PGDetailsService;
@@ -51,7 +52,7 @@ public class PGDetailsController {
 	}
 	
 	@ApiOperation(value = "Update PGDetails", notes = "It is used to Update the PGDetails")
-	@ApiResponses(value = {@ApiResponse(code = 201,message = "Created"),
+	@ApiResponses(value = {@ApiResponse(code = 201,message = "Updated"),
 			@ApiResponse(code = 500,message = "Internal server Error"),
 			@ApiResponse(code = 404,message = "Not found")})
 	@PutMapping(consumes = {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_ATOM_XML_VALUE},produces = 
@@ -61,13 +62,23 @@ public class PGDetailsController {
 	}
 	
 	@ApiOperation(value = "Delete PGDetails", notes = "It is used to delete PGDetails")
-	@ApiResponses(value = {
+	@ApiResponses(value = {@ApiResponse(code = 201,message = "Deleted"),
 			@ApiResponse(code = 500,message = "Internal server Error"),
 			@ApiResponse(code = 404,message = "Not found")})
 	@DeleteMapping(consumes = {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_ATOM_XML_VALUE},produces = 
 			MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<ResponseStructure<PGDetails>> deletePGDetailsById(@RequestParam int id) {
 		return service.deletePGDetails(id);
+	}
+	
+	@ApiOperation(value = "Get All PGDetails", notes = "It is used to get the PGDetails")
+	@ApiResponses(value = {
+			@ApiResponse(code = 500,message = "Internal server Error"),
+			@ApiResponse(code = 404,message = "Not found")})
+	@GetMapping(consumes = {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_ATOM_XML_VALUE},produces = 
+			MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ResponseStructure<List<PGDetails>>> getAllPGDetails() {
+		return service.getAllPGDetails();
 	}
 
 	

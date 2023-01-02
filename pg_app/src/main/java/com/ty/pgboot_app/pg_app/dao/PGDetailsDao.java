@@ -1,5 +1,6 @@
 package com.ty.pgboot_app.pg_app.dao;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,9 +26,12 @@ public class PGDetailsDao {
 	return repository.findById(id);
 	
 	}
-	
 	public void deletePGDetails(PGDetails pgDetails) {
 		repository.delete(pgDetails);
 		
+	}
+	public List<PGDetails> getAllPGDetails()
+	{
+		return repository.findAll();
 	}
 }
