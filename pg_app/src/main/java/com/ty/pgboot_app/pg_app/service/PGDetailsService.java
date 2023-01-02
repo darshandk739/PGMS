@@ -36,6 +36,7 @@ public class PGDetailsService {
 		ResponseEntity<ResponseStructure<PGDetails>> responseEntity = new ResponseEntity<ResponseStructure<PGDetails>>(
 				responseStructure, HttpStatus.OK);
 		if (optional.isPresent()) {
+			pgDetails.setPgId(id);
 			responseStructure.setStatus(HttpStatus.OK.value());
 			responseStructure.setMessage("Updated");
 			responseStructure.setData(dao.updatePGDetails(pgDetails));
@@ -74,6 +75,21 @@ public class PGDetailsService {
 			return responseEntity;
 		}
 		throw new UnableToDeleteException();
+	}
+	
+	public ResponseEntity<ResponseStructure<PGDetails>> getPGByLocation(String loc) {
+		PGDetails pg = dao.getPGByLocation(loc);
+		ResponseStructure<PGDetails> responseStructure = new ResponseStructure<PGDetails>();
+		ResponseEntity<ResponseStructure<PGDetails>> responseEntity = new ResponseEntity<ResponseStructure<PGDetails>>(
+				responseStructure, HttpStatus.OK);
+		if (pg!=null) {
+			responseStructure.setStatus(HttpStatus.OK.value());
+			responseStructure.setMessage("Retrieved");
+			responseStructure.setData(pg);
+
+			return responseEntity;
+		}
+		throw new NoSuchIdFoundException();
 	}
 
 }

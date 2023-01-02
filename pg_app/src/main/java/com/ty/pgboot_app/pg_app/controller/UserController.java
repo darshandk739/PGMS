@@ -1,10 +1,13 @@
 package com.ty.pgboot_app.pg_app.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -62,5 +65,14 @@ public class UserController {
 	@DeleteMapping(produces = {MediaType.APPLICATION_JSON_VALUE})
 	public ResponseEntity<ResponseStructure<User>> deleteUser(int id){
 		return userService.deleteUser(id);
+	}
+	
+	
+	@ApiOperation(value = "GetAllUsers", notes = "It is used to get all Users")
+	@ApiResponses(value = {@ApiResponse(code = 500, message = "Internal Server Error"),
+			@ApiResponse(code = 404, message = "Not Found")})
+	@PatchMapping(produces = {MediaType.APPLICATION_JSON_VALUE})
+	public ResponseEntity<ResponseStructure<List<User>>> getAllUsers(){
+		return userService.getAllUsers();
 	}
 }

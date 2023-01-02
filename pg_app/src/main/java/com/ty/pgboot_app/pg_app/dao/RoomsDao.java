@@ -1,6 +1,7 @@
 package com.ty.pgboot_app.pg_app.dao;
 
 import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import com.ty.pgboot_app.pg_app.dto.Rooms;
@@ -18,7 +19,7 @@ public class RoomsDao {
 	public Rooms updateRooms(Rooms rooms) {
 		return roomsRepository.save(rooms);
 	}
-
+	
 	public Optional<Rooms> getRoomsById(int id) {
 		 return roomsRepository.findById(id);
 		

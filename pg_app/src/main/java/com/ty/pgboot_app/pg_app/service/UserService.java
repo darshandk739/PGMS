@@ -1,5 +1,6 @@
 package com.ty.pgboot_app.pg_app.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,7 @@ public class UserService {
 		ResponseEntity<ResponseStructure<User>> responseEntity = new ResponseEntity<ResponseStructure<User>>(
 				responseStructure, HttpStatus.OK);
 		if(optional.isPresent()) {
+			user.setUserId(id);		
 		responseStructure.setStatus(HttpStatus.OK.value());
 		responseStructure.setMessage("Updated");
 		responseStructure.setData(userDao.updateUser(user));
@@ -69,5 +71,17 @@ public class UserService {
 			return responseEntity;
 		}
 		throw new UnableToDeleteException();
+	}
+	
+	public ResponseEntity<ResponseStructure<List<User>>> getAllUsers(){
+		List<User> userList = userDao.getAllUsers();
+		
+		ResponseStructure<List<User>> responseStructure = new ResponseStructure<List<User>>();
+		ResponseEntity<ResponseStructure<List<User>>> responseEntity = new ResponseEntity<ResponseStructure<List<User>>>(
+				responseStructure, HttpStatus.OK);
+		responseStructure.setStatus(HttpStatus.OK.value());
+		responseStructure.setMessage("All User Details");
+		responseStructure.setData(userList);
+		return responseEntity;
 	}
 }

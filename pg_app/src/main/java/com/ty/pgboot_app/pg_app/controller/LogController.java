@@ -1,0 +1,38 @@
+////package com.ty.pgboot_app.pg_app.controller;
+////
+////
+//////Rest Controller to print various log level messages
+////
+////	import org.slf4j.Logger;
+////	import org.slf4j.LoggerFactory;
+////	import org.springframework.web.bind.annotation.RequestMapping;
+////	import org.springframework.web.bind.annotation.RestController;
+////
+////	@RestController
+////	public class LogController {
+////
+////		// creating a logger
+////		Logger logger
+////			= LoggerFactory.getLogger(LogController.class);
+////																								
+////		@RequestMapping("/log") public String log()
+////		{
+////			// Logging various log level messages
+////			logger.trace("Log level: TRACE");
+////			logger.info("Log level: INFO");
+////			logger.debug("Log level: DEBUG");
+////			logger.error("Log level: ERROR");
+////			logger.warn("Log level: WARN");
+////
+////			return "Hey! You can check the output in the logs";
+////		}
+////	}
+//
+//
+//
+//
+//debug= true;
+//trace=true;
+//spring.output.ansi.enabled=always
+//logging.file.path=logs/
+//logging.file.name=logs/application.log

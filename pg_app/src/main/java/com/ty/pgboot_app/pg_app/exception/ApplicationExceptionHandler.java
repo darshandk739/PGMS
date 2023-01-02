@@ -76,4 +76,15 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler 
 		}
 		return super.handleMethodArgumentNotValid(ex, headers, status, request);
 	}
+	
+	@ExceptionHandler(MustNotBeNullException.class)
+	public ResponseEntity<ResponseStructure<String>> constraintViolationException(MustNotBeNullException exception){
+		ResponseStructure<String> responseStructure = new ResponseStructure<String>();
+		responseStructure.setStatus(HttpStatus.NOT_FOUND.value());
+		responseStructure.setMessage("must not be null");
+		responseStructure.setData(exception.getMessage());
+		ResponseEntity<ResponseStructure<String>> responseEntity = new ResponseEntity<ResponseStructure<String>>(
+				responseStructure, HttpStatus.NOT_FOUND);
+		return responseEntity;
+	}
 }
