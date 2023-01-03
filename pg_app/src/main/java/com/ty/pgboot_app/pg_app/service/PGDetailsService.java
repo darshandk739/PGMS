@@ -1,5 +1,6 @@
 package com.ty.pgboot_app.pg_app.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,7 +77,22 @@ public class PGDetailsService {
 		}
 		throw new UnableToDeleteException();
 	}
+
+	public ResponseEntity<ResponseStructure<List<PGDetails>>> getAllPGDetails() {
+		List<PGDetails> pgDetails = dao.getAllPGDetails();
+		ResponseStructure<List<PGDetails>> responseStructure = new ResponseStructure<List<PGDetails>>();
+		ResponseEntity<ResponseStructure<List<PGDetails>>> responseEntity = new ResponseEntity<ResponseStructure<List<PGDetails>>>(
+				responseStructure, HttpStatus.OK);
 	
+			responseStructure.setStatus(HttpStatus.OK.value());
+			responseStructure.setMessage("Retrieved");
+			responseStructure.setData(pgDetails);
+
+
+			return responseEntity;
+
+
+	}
 	public ResponseEntity<ResponseStructure<PGDetails>> getPGByLocation(String loc) {
 		PGDetails pg = dao.getPGByLocation(loc);
 		ResponseStructure<PGDetails> responseStructure = new ResponseStructure<PGDetails>();
@@ -91,5 +107,5 @@ public class PGDetailsService {
 		}
 		throw new NoSuchIdFoundException();
 	}
-
+	
 }

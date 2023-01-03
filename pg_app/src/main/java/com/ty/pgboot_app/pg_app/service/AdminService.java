@@ -22,6 +22,7 @@ public class AdminService {
 	private AdminDao adminDao;
 
 	public ResponseEntity<ResponseStructure<Admin>> saveAdmin(Admin admin) {
+		if (admin!=null) {
 		ResponseStructure<Admin> responseStructure = new ResponseStructure<Admin>();
 		ResponseEntity<ResponseStructure<Admin>> responseEntity = new ResponseEntity<ResponseStructure<Admin>>(
 				responseStructure, HttpStatus.OK);
@@ -39,6 +40,8 @@ public class AdminService {
 			return responseEntity;
 		
 		
+	}
+		return null;
 	}
 
 	public ResponseEntity<ResponseStructure<Admin>> updateAdmin(Admin admin, int id) {

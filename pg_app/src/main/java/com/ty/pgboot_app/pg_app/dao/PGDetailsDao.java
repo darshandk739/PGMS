@@ -1,5 +1,6 @@
 package com.ty.pgboot_app.pg_app.dao;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,23 +13,27 @@ import com.ty.pgboot_app.pg_app.repo.PGDetailsRepository;
 public class PGDetailsDao {
 	@Autowired
 	private PGDetailsRepository repository;
-	
-	public PGDetails savePGDetails(PGDetails pgDetails ) {
+
+	public PGDetails savePGDetails(PGDetails pgDetails) {
 		return repository.save(pgDetails);
 	}
-	
-	public PGDetails updatePGDetails(PGDetails pgDetails ) {
+
+	public PGDetails updatePGDetails(PGDetails pgDetails) {
 		return repository.save(pgDetails);
 	}
-	
+
 	public Optional<PGDetails> getPGDetailsById(int id) {
-	return repository.findById(id);
-	
+		return repository.findById(id);
+
 	}
-	
+
 	public void deletePGDetails(PGDetails pgDetails) {
 		repository.delete(pgDetails);
-		
+
+	}
+
+	public List<PGDetails> getAllPGDetails() {
+		return repository.findAll();
 	}
 
 	public PGDetails getPGByLocation(String loc) {
