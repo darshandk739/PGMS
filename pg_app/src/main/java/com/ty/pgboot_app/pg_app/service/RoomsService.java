@@ -2,6 +2,8 @@ package com.ty.pgboot_app.pg_app.service;
 
 import java.util.List;
 import java.util.Optional;
+
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +19,7 @@ import com.ty.pgboot_app.pg_app.util.ResponseStructure;
 public class RoomsService {
 	@Autowired
 	private RoomsDao roomsDao;
-
+private static final Logger logger= Logger.getLogger(RoomsService.class);
 	public ResponseEntity<ResponseStructure<Rooms>> saveRooms(Rooms rooms) {
 
 		ResponseStructure<Rooms> responseStructure = new ResponseStructure<Rooms>();
@@ -26,6 +28,7 @@ public class RoomsService {
 		responseStructure.setStatus(HttpStatus.CREATED.value());
 		responseStructure.setMessage("Created");
 		responseStructure.setData(roomsDao.saveRooms(rooms));
+		logger.info("saved Roomservice to databse");
 		return responseEntity;
 	}
 

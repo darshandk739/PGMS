@@ -27,6 +27,10 @@ public class Admin {
 
 	@NotBlank
 
+<<<<<<< HEAD
+=======
+	private int adminId;
+>>>>>>> c5d25f032d65408aa4d1ae8e735d2336ca094ae4
 	private String adminName;
 	@NotNull
 	private String adminUserName;
