@@ -8,10 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-
 
 import javax.validation.constraints.NotNull;
 
@@ -25,12 +23,14 @@ public class Admin {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 
-
 	@NotBlank(message = "Please fill the reqiured")
 
 	@NotBlank
 
+<<<<<<< HEAD
+=======
 	private int adminId;
+>>>>>>> c5d25f032d65408aa4d1ae8e735d2336ca094ae4
 	private String adminName;
 	@NotNull
 	private String adminUserName;
@@ -42,5 +42,5 @@ public class Admin {
 	private List<PGDetails> pgDetails;
 	@OneToMany
 	private List<User> users;
-	
+
 }
