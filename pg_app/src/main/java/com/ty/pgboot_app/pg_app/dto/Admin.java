@@ -30,7 +30,7 @@ public class Admin {
 
 	@NotBlank
 
-
+	private int adminId;
 	private String adminName;
 	@NotNull
 	private String adminUserName;
