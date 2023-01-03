@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.ty.pgboot_app.pg_app.dao.AdminDao;
 import com.ty.pgboot_app.pg_app.dto.Admin;
-import com.ty.pgboot_app.pg_app.exception.MustNotBeNullException;
+import com.ty.pgboot_app.pg_app.exception.MustNotBeBlankException;
 import com.ty.pgboot_app.pg_app.exception.NoSuchIdFoundException;
 import com.ty.pgboot_app.pg_app.exception.UnableToDeleteException;
 import com.ty.pgboot_app.pg_app.util.ResponseStructure;
@@ -27,8 +27,11 @@ public class AdminService {
 				responseStructure, HttpStatus.OK);
 		
 		if(admin.getAdminName().isEmpty()||admin.getAdminEmail().isEmpty()||admin.getAdminPassword().isEmpty()) {
-			throw new MustNotBeNullException();
+			throw new MustNotBeBlankException();
 			}
+		if(admin.getAdminName().equals(null)) {
+			throw new NullPointerException();
+		}
 		
 			responseStructure.setStatus(HttpStatus.CREATED.value());
 			responseStructure.setMessage("Created");

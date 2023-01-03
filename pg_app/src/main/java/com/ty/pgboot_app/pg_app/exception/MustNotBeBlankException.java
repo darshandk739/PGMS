@@ -1,20 +1,20 @@
 package com.ty.pgboot_app.pg_app.exception;
 
 
-public class MustNotBeNullException extends RuntimeException {
+public class MustNotBeBlankException extends RuntimeException {
 	
-	private String message = "Field must not be null";
+	private String message = "Field must not be blank";
 	
 	
 
-	public MustNotBeNullException() {
+	public MustNotBeBlankException() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
 
 
-	public MustNotBeNullException(String message) {
+	public MustNotBeBlankException(String message) {
 		super();
 		this.message = message;
 	}
