@@ -79,4 +79,27 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler 
 		return super.handleMethodArgumentNotValid(ex, headers, status, request);
 	}
 
+	
+	@ExceptionHandler(MustNotBeBlankException.class)
+	public ResponseEntity<ResponseStructure<String>> constraintViolationException(MustNotBeBlankException exception){
+		ResponseStructure<String> responseStructure = new ResponseStructure<String>();
+		responseStructure.setStatus(HttpStatus.NOT_FOUND.value());
+		responseStructure.setMessage("must not be blank");
+		responseStructure.setData(exception.getMessage());
+		ResponseEntity<ResponseStructure<String>> responseEntity = new ResponseEntity<ResponseStructure<String>>(
+				responseStructure, HttpStatus.NOT_FOUND);
+		return responseEntity;
+	}
+	
+	@ExceptionHandler(NullPointerException.class)
+	public ResponseEntity<ResponseStructure<String>> nullPointerException(NullPointerException exception){
+		ResponseStructure<String> responseStructure = new ResponseStructure<String>();
+		responseStructure.setStatus(HttpStatus.NOT_FOUND.value());
+		responseStructure.setMessage("must not be null");
+		responseStructure.setData(exception.getMessage());
+		ResponseEntity<ResponseStructure<String>> responseEntity = new ResponseEntity<ResponseStructure<String>>(
+				responseStructure, HttpStatus.NOT_FOUND);
+		return responseEntity;
+	}
+
 }
