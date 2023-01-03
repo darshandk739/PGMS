@@ -37,6 +37,9 @@ public class AdminController {
 		return adminService.saveAdmin(admin);
 	}
 
+	
+	
+	
 	@ApiOperation(value = "UpdateAdmin", notes = "It is used to Update the Admin")
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "Created"),
 			@ApiResponse(code = 500, message = "Internal Server Error"),
