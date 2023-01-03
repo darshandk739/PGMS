@@ -2,6 +2,8 @@ package com.ty.pgboot_app.pg_app.service;
 
 import java.util.Optional;
 
+import javax.validation.ConstraintViolationException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -9,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.ty.pgboot_app.pg_app.dao.AdminDao;
 import com.ty.pgboot_app.pg_app.dto.Admin;
+import com.ty.pgboot_app.pg_app.exception.MustNotBeNullException;
 import com.ty.pgboot_app.pg_app.exception.NoSuchIdFoundException;
 import com.ty.pgboot_app.pg_app.exception.UnableToDeleteException;
 import com.ty.pgboot_app.pg_app.util.ResponseStructure;
@@ -23,10 +26,17 @@ public class AdminService {
 		ResponseStructure<Admin> responseStructure = new ResponseStructure<Admin>();
 		ResponseEntity<ResponseStructure<Admin>> responseEntity = new ResponseEntity<ResponseStructure<Admin>>(
 				responseStructure, HttpStatus.OK);
-		responseStructure.setStatus(HttpStatus.CREATED.value());
-		responseStructure.setMessage("Created");
-		responseStructure.setData(adminDao.saveAdmin(admin));
-		return responseEntity;
+		
+		if(admin.getAdminName().isEmpty()||admin.getAdminEmail().isEmpty()||admin.getAdminPassword().isEmpty()) {
+			throw new MustNotBeNullException();
+			}
+		
+			responseStructure.setStatus(HttpStatus.CREATED.value());
+			responseStructure.setMessage("Created");
+			responseStructure.setData(adminDao.saveAdmin(admin));
+			return responseEntity;
+		
+		
 	}
 		return null;
 	}
@@ -37,6 +47,7 @@ public class AdminService {
 		ResponseEntity<ResponseStructure<Admin>> responseEntity = new ResponseEntity<ResponseStructure<Admin>>(
 				responseStructure, HttpStatus.OK);
 		if (admin2.isPresent()) {
+			admin.setAdminId(id);
 			responseStructure.setStatus(HttpStatus.OK.value());
 			responseStructure.setMessage("Updated");
 			responseStructure.setData(adminDao.updateAdmin(admin));
@@ -60,10 +71,11 @@ public class AdminService {
 	}
 
 	public ResponseEntity<ResponseStructure<Admin>> deleteAdmin(int id) {
-		Optional<Admin> optional = adminDao.getAdminById(id);
 		ResponseStructure<Admin> responseStructure = new ResponseStructure<Admin>();
 		ResponseEntity<ResponseStructure<Admin>> responseEntity = new ResponseEntity<ResponseStructure<Admin>>(
 				responseStructure, HttpStatus.OK);
+		Optional<Admin> optional = adminDao.getAdminById(id);
+
 		if (optional.isPresent()) {
 			adminDao.deleteAdmin(optional.get());
 			responseStructure.setStatus(HttpStatus.OK.value());

@@ -28,7 +28,9 @@ public class PGDetails {
 	private String pgFacilities;
 	private String pgFoods;
 
-	@OneToMany(cascade=CascadeType.ALL)
+
+	@OneToMany(cascade = CascadeType.ALL)
+
 	private List<Rooms> rooms;
 
 

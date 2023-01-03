@@ -30,8 +30,10 @@ public class PGDetailsDao {
 		repository.delete(pgDetails);
 		
 	}
+
 	public List<PGDetails> getAllPGDetails()
 	{
 		return repository.findAll();
+
 	}
 }
