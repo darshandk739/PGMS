@@ -93,4 +93,19 @@ public class PGDetailsService {
 
 
 	}
+	public ResponseEntity<ResponseStructure<PGDetails>> getPGByLocation(String loc) {
+		PGDetails pg = dao.getPGByLocation(loc);
+		ResponseStructure<PGDetails> responseStructure = new ResponseStructure<PGDetails>();
+		ResponseEntity<ResponseStructure<PGDetails>> responseEntity = new ResponseEntity<ResponseStructure<PGDetails>>(
+				responseStructure, HttpStatus.OK);
+		if (pg!=null) {
+			responseStructure.setStatus(HttpStatus.OK.value());
+			responseStructure.setMessage("Retrieved");
+			responseStructure.setData(pg);
+
+			return responseEntity;
+		}
+		throw new NoSuchIdFoundException();
+	}
+	
 }
