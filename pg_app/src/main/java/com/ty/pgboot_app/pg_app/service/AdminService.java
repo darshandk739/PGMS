@@ -22,22 +22,21 @@ public class AdminService {
 	private AdminDao adminDao;
 
 	public ResponseEntity<ResponseStructure<Admin>> saveAdmin(Admin admin) {
-		if (admin!=null) {
-		ResponseStructure<Admin> responseStructure = new ResponseStructure<Admin>();
-		ResponseEntity<ResponseStructure<Admin>> responseEntity = new ResponseEntity<ResponseStructure<Admin>>(
-				responseStructure, HttpStatus.OK);
-		
-		if(admin.getAdminName().isEmpty()||admin.getAdminEmail().isEmpty()||admin.getAdminPassword().isEmpty()) {
-			throw new MustNotBeNullException();
+		if (admin != null) {
+			ResponseStructure<Admin> responseStructure = new ResponseStructure<Admin>();
+			ResponseEntity<ResponseStructure<Admin>> responseEntity = new ResponseEntity<ResponseStructure<Admin>>(
+					responseStructure, HttpStatus.OK);
+
+			if (admin.getAdminName().isEmpty() || admin.getAdminEmail().isEmpty()
+					|| admin.getAdminPassword().isEmpty()) {
+				throw new MustNotBeNullException();
 			}
-		
+
 			responseStructure.setStatus(HttpStatus.CREATED.value());
 			responseStructure.setMessage("Created");
 			responseStructure.setData(adminDao.saveAdmin(admin));
 			return responseEntity;
-		
-		
-	}
+		}
 		return null;
 	}
 
