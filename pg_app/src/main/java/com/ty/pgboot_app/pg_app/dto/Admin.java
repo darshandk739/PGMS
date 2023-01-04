@@ -25,7 +25,7 @@ public class Admin {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int adminId;
-	@NotNull
+	@NotBlank(message = "Please fill the admin name")
 	private String adminName;
 	@NotBlank(message = "User name can not be blank, Please fill the valid Name")
 	private String adminUserName;
