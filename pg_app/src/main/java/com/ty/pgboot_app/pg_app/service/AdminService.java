@@ -1,5 +1,6 @@
 package com.ty.pgboot_app.pg_app.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.validation.ConstraintViolationException;
@@ -11,7 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.ty.pgboot_app.pg_app.dao.AdminDao;
 import com.ty.pgboot_app.pg_app.dto.Admin;
-import com.ty.pgboot_app.pg_app.exception.MustNotBeNullException;
+import com.ty.pgboot_app.pg_app.exception.MustNotBeBlankException;
 import com.ty.pgboot_app.pg_app.exception.NoSuchIdFoundException;
 import com.ty.pgboot_app.pg_app.exception.UnableToDeleteException;
 import com.ty.pgboot_app.pg_app.util.ResponseStructure;
@@ -29,13 +30,25 @@ public class AdminService {
 
 			if (admin.getAdminName().isEmpty() || admin.getAdminEmail().isEmpty()
 					|| admin.getAdminPassword().isEmpty()) {
+<<<<<<< HEAD
 				throw new MustNotBeNullException();
 			}
+=======
+				throw new MustNotBeBlankException();
+			}
+			if (admin.getAdminName().equals(null)) {
+				throw new NullPointerException();
+			}
+>>>>>>> a669515d8d2fe77927e6631a272822f880b52d74
 
 			responseStructure.setStatus(HttpStatus.CREATED.value());
 			responseStructure.setMessage("Created");
 			responseStructure.setData(adminDao.saveAdmin(admin));
 			return responseEntity;
+<<<<<<< HEAD
+=======
+
+>>>>>>> a669515d8d2fe77927e6631a272822f880b52d74
 		}
 		return null;
 	}
@@ -83,6 +96,17 @@ public class AdminService {
 			return responseEntity;
 		}
 		throw new UnableToDeleteException();
+	}
+	
+	public ResponseEntity<ResponseStructure<List<Admin>>> getAllAdmin(){
+		ResponseStructure<List<Admin>> responseStructure = new ResponseStructure<List<Admin>>();
+		ResponseEntity<ResponseStructure<List<Admin>>> responseEntity = new ResponseEntity<ResponseStructure<List<Admin>>>(
+				responseStructure, HttpStatus.OK);
+		responseStructure.setStatus(HttpStatus.OK.value());
+		responseStructure.setMessage("Admin Details");
+		responseStructure.setData(adminDao.getAllAdmin());
+		return responseEntity;
+		
 	}
 
 }
