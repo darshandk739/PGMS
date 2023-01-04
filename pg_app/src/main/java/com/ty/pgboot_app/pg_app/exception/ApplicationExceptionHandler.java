@@ -20,6 +20,27 @@ import com.ty.pgboot_app.pg_app.util.ResponseStructure;
 
 @RestControllerAdvice
 public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler {
+	
+	@Override
+	protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
+			HttpHeaders headers, HttpStatus status, WebRequest request) {
+		List<ObjectError> errors = ex.getAllErrors();
+		Map<String, String> map = new LinkedHashMap<>();	
+		for(ObjectError  error:errors) {
+			String message =error.getDefaultMessage();
+			String field =((FieldError)error).getField();
+			map.put(field, message);
+			
+		}
+		ResponseStructure<Map<String,String>> responseStructure = new ResponseStructure<>();
+		responseStructure.setStatus(HttpStatus.BAD_REQUEST.value());
+		responseStructure.setMessage(HttpStatus.BAD_REQUEST.name());
+		responseStructure.setData(map);
+		
+		return  new ResponseEntity<Object>(responseStructure,HttpStatus.BAD_REQUEST) ;
+	
+		
+	}
 
 	@ExceptionHandler(NoSuchIdFoundException.class)
 	public ResponseEntity<ResponseStructure<String>> noSuchIdFoundException(NoSuchIdFoundException exception) {
@@ -57,49 +78,49 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler 
 		return responseEntity;
 	}
 
-	@Override
-	protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
-			HttpHeaders headers, HttpStatus status, WebRequest request) {
-
-		List<ObjectError> errors = ex.getAllErrors();
-		Map<String, String> map = new LinkedHashMap<String, String>();
-
-		for (ObjectError er : errors) {
-
-			String message = er.getDefaultMessage();
-			String fieldName = ((FieldError) er).getField();
-			map.put(fieldName, message);
-
-			ResponseStructure<Map<String, String>> responseStructure = new ResponseStructure<Map<String, String>>();
-			responseStructure.setStatus(HttpStatus.BAD_REQUEST.value());
-			responseStructure.setMessage("no proper input");
-			responseStructure.setData(map);
-			return new ResponseEntity<>(responseStructure, HttpStatus.BAD_REQUEST);
-		}
-		return super.handleMethodArgumentNotValid(ex, headers, status, request);
-	}
+//	@Override
+//	protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
+//			HttpHeaders headers, HttpStatus status, WebRequest request) {
+//
+//		List<ObjectError> errors = ex.getAllErrors();
+//		Map<String, String> map = new LinkedHashMap<String, String>();
+//
+//		for (ObjectError er : errors) {
+//
+//			String message = er.getDefaultMessage();
+//			String fieldName = ((FieldError) er).getField();
+//			map.put(fieldName, message);
+//
+//			ResponseStructure<Map<String, String>> responseStructure = new ResponseStructure<Map<String, String>>();
+//			responseStructure.setStatus(HttpStatus.BAD_REQUEST.value());
+//			responseStructure.setMessage("no proper input");
+//			responseStructure.setData(map);
+//			return new ResponseEntity<>(responseStructure, HttpStatus.BAD_REQUEST);
+//		}
+//		return super.handleMethodArgumentNotValid(ex, headers, status, request);
+//	}
 
 	
-	@ExceptionHandler(MustNotBeBlankException.class)
-	public ResponseEntity<ResponseStructure<String>> constraintViolationException(MustNotBeBlankException exception){
-		ResponseStructure<String> responseStructure = new ResponseStructure<String>();
-		responseStructure.setStatus(HttpStatus.NOT_FOUND.value());
-		responseStructure.setMessage("must not be blank");
-		responseStructure.setData(exception.getMessage());
-		ResponseEntity<ResponseStructure<String>> responseEntity = new ResponseEntity<ResponseStructure<String>>(
-				responseStructure, HttpStatus.NOT_FOUND);
-		return responseEntity;
-	}
-	
-	@ExceptionHandler(NullPointerException.class)
-	public ResponseEntity<ResponseStructure<String>> nullPointerException(NullPointerException exception){
-		ResponseStructure<String> responseStructure = new ResponseStructure<String>();
-		responseStructure.setStatus(HttpStatus.NOT_FOUND.value());
-		responseStructure.setMessage("must not be null");
-		responseStructure.setData(exception.getMessage());
-		ResponseEntity<ResponseStructure<String>> responseEntity = new ResponseEntity<ResponseStructure<String>>(
-				responseStructure, HttpStatus.NOT_FOUND);
-		return responseEntity;
-	}
+//	@ExceptionHandler(MustNotBeBlankException.class)
+//	public ResponseEntity<ResponseStructure<String>> constraintViolationException(MustNotBeBlankException exception){
+//		ResponseStructure<String> responseStructure = new ResponseStructure<String>();
+//		responseStructure.setStatus(HttpStatus.NOT_FOUND.value());
+//		responseStructure.setMessage("must not be blank");
+//		responseStructure.setData(exception.getMessage());
+//		ResponseEntity<ResponseStructure<String>> responseEntity = new ResponseEntity<ResponseStructure<String>>(
+//				responseStructure, HttpStatus.NOT_FOUND);
+//		return responseEntity;
+//	}
+//	
+//	@ExceptionHandler(NullPointerException.class)
+//	public ResponseEntity<ResponseStructure<String>> nullPointerException(NullPointerException exception){
+//		ResponseStructure<String> responseStructure = new ResponseStructure<String>();
+//		responseStructure.setStatus(HttpStatus.NOT_FOUND.value());
+//		responseStructure.setMessage("must not be null");
+//		responseStructure.setData(exception.getMessage());
+//		ResponseEntity<ResponseStructure<String>> responseEntity = new ResponseEntity<ResponseStructure<String>>(
+//				responseStructure, HttpStatus.NOT_FOUND);
+//		return responseEntity;
+//	}
 
 }

@@ -1,5 +1,6 @@
 package com.ty.pgboot_app.pg_app.dao;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,5 +28,9 @@ public class AdminDao {
 	
 	public void deleteAdmin(Admin admin) {
 		adminRepository.delete(admin);	
+	}
+	
+	public List<Admin> getAllAdmin() {
+		return adminRepository.findAll();
 	}
 }
