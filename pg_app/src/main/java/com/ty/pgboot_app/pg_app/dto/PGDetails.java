@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -23,7 +24,7 @@ public class PGDetails {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int pgId;
-	@NotBlank(message="Please enter a valid PG name")
+	@NotNull(message="Name should not be null, please the enter the name")
 	private String pgName;
 	@NotBlank(message="Please enter a valid PG owner name")
 	private String pgOwnername;
