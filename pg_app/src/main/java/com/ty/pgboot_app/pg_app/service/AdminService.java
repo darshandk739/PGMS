@@ -1,5 +1,6 @@
 package com.ty.pgboot_app.pg_app.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.validation.ConstraintViolationException;
@@ -87,6 +88,17 @@ public class AdminService {
 			return responseEntity;
 		}
 		throw new UnableToDeleteException();
+	}
+	
+	public ResponseEntity<ResponseStructure<List<Admin>>> getAllAdmin(){
+		ResponseStructure<List<Admin>> responseStructure = new ResponseStructure<List<Admin>>();
+		ResponseEntity<ResponseStructure<List<Admin>>> responseEntity = new ResponseEntity<ResponseStructure<List<Admin>>>(
+				responseStructure, HttpStatus.OK);
+		responseStructure.setStatus(HttpStatus.OK.value());
+		responseStructure.setMessage("Admin Details");
+		responseStructure.setData(adminDao.getAllAdmin());
+		return responseEntity;
+		
 	}
 
 }
