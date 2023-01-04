@@ -30,25 +30,17 @@ public class AdminService {
 
 			if (admin.getAdminName().isEmpty() || admin.getAdminEmail().isEmpty()
 					|| admin.getAdminPassword().isEmpty()) {
-<<<<<<< HEAD
-				throw new MustNotBeNullException();
-			}
-=======
+
 				throw new MustNotBeBlankException();
 			}
 			if (admin.getAdminName().equals(null)) {
 				throw new NullPointerException();
 			}
->>>>>>> a669515d8d2fe77927e6631a272822f880b52d74
 
 			responseStructure.setStatus(HttpStatus.CREATED.value());
 			responseStructure.setMessage("Created");
 			responseStructure.setData(adminDao.saveAdmin(admin));
 			return responseEntity;
-<<<<<<< HEAD
-=======
-
->>>>>>> a669515d8d2fe77927e6631a272822f880b52d74
 		}
 		return null;
 	}
