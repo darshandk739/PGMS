@@ -19,6 +19,7 @@ import com.ty.pgboot_app.pg_app.util.ResponseStructure;
 public class RoomsService {
 	@Autowired
 	private RoomsDao roomsDao;
+	//log4j
 	private static final Logger logger = Logger.getLogger(RoomsService.class);
 
 	public ResponseEntity<ResponseStructure<Rooms>> saveRooms(Rooms rooms) {
