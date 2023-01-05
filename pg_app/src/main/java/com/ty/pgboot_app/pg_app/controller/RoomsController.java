@@ -2,6 +2,8 @@ package com.ty.pgboot_app.pg_app.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -36,7 +38,7 @@ public class RoomsController {
 
 	@PostMapping(consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE }, produces = {
 			MediaType.APPLICATION_JSON_VALUE })
-	public ResponseEntity<ResponseStructure<Rooms>> saveRooms(Rooms rooms) {
+	public ResponseEntity<ResponseStructure<Rooms>> saveRooms(@Valid @RequestBody Rooms rooms) {
 		return roomService.saveRooms(rooms);
 	}
 
@@ -47,7 +49,7 @@ public class RoomsController {
 	@PutMapping(consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE }, produces = {
 			MediaType.APPLICATION_JSON_VALUE })
 
-	public ResponseEntity<ResponseStructure<Rooms>> updateRooms(@RequestBody Rooms rooms, @RequestParam int id) {
+	public ResponseEntity<ResponseStructure<Rooms>> updateRooms(@Valid @RequestBody Rooms rooms, @RequestParam int id) {
 		return roomService.updateRooms(rooms, id);
 	}
 
@@ -55,7 +57,7 @@ public class RoomsController {
 	@ApiResponses(value = { @ApiResponse(code = 500, message = "Internal Server Error"),
 			@ApiResponse(code = 404, message = "NotFound") })
 	@GetMapping(produces = { MediaType.APPLICATION_JSON_VALUE })
-	public ResponseEntity<ResponseStructure<Rooms>> getRooms(int id) {
+	public ResponseEntity<ResponseStructure<Rooms>> getRooms(@Valid @RequestParam int id) {
 		return roomService.getRoomsById(id);
 	}
 
@@ -71,7 +73,7 @@ public class RoomsController {
 	@ApiResponses(value = { @ApiResponse(code = 500, message = "Internal Server Error"),
 			@ApiResponse(code = 404, message = "NotFound") })
 	@DeleteMapping(produces = { MediaType.APPLICATION_JSON_VALUE })
-	public ResponseEntity<ResponseStructure<Rooms>> deleteRooms(int id) {
+	public ResponseEntity<ResponseStructure<Rooms>> deleteRooms(@Valid @RequestParam int id) {
 		return roomService.deleteRoomsById(id);
 	}
 }
