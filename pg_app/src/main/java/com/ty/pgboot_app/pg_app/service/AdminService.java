@@ -27,11 +27,11 @@ public class AdminService {
 			ResponseStructure<Admin> responseStructure = new ResponseStructure<Admin>();
 			ResponseEntity<ResponseStructure<Admin>> responseEntity = new ResponseEntity<ResponseStructure<Admin>>(
 					responseStructure, HttpStatus.OK);
+
 			responseStructure.setStatus(HttpStatus.CREATED.value());
 			responseStructure.setMessage("Created");
 			responseStructure.setData(adminDao.saveAdmin(admin));
 			return responseEntity;
-
 		}
 		return null;
 	}
