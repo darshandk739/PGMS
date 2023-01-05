@@ -30,6 +30,7 @@ public class AdminService {
 
 			if (admin.getAdminName().isEmpty() || admin.getAdminEmail().isEmpty()
 					|| admin.getAdminPassword().isEmpty()) {
+
 				throw new MustNotBeBlankException();
 			}
 			if (admin.getAdminName().equals(null)) {
@@ -40,7 +41,6 @@ public class AdminService {
 			responseStructure.setMessage("Created");
 			responseStructure.setData(adminDao.saveAdmin(admin));
 			return responseEntity;
-
 		}
 		return null;
 	}
