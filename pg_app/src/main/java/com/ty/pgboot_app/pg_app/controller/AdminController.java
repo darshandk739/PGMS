@@ -70,7 +70,7 @@ public class AdminController {
 	public ResponseEntity<ResponseStructure<Admin>> deleteAdmin(@Valid @RequestParam int id){
 		return adminService.deleteAdmin(id);
 	}
-	
+	//api
 	@ApiOperation(value = "GetAllAdmin", notes = "It is used to Get all the Admins")
 	@ApiResponses(value = {@ApiResponse(code = 500, message = "Internal Server Error"),
 			@ApiResponse(code = 404, message = "Not Found")})
