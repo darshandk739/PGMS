@@ -19,7 +19,8 @@ import com.ty.pgboot_app.pg_app.util.ResponseStructure;
 public class RoomsService {
 	@Autowired
 	private RoomsDao roomsDao;
-private static final Logger logger= Logger.getLogger(RoomsService.class);
+	private static final Logger logger = Logger.getLogger(RoomsService.class);
+
 	public ResponseEntity<ResponseStructure<Rooms>> saveRooms(Rooms rooms) {
 
 		ResponseStructure<Rooms> responseStructure = new ResponseStructure<Rooms>();
@@ -28,7 +29,7 @@ private static final Logger logger= Logger.getLogger(RoomsService.class);
 		responseStructure.setStatus(HttpStatus.CREATED.value());
 		responseStructure.setMessage("Created");
 		responseStructure.setData(roomsDao.saveRooms(rooms));
-		logger.info("saved Roomservice to databse");
+		logger.info("rooms added to database");
 		return responseEntity;
 	}
 
@@ -43,8 +44,10 @@ private static final Logger logger= Logger.getLogger(RoomsService.class);
 			responseStructure.setStatus(HttpStatus.OK.value());
 			responseStructure.setMessage("Rooms Updated");
 			responseStructure.setData(roomsDao.updateRooms(rooms));
+			logger.debug("rooms updated to database");
 			return responseEntity;
 		}
+		logger.warn("no such id found in database to update");
 		throw new UnableToUpdateException("no such id found in database to update");
 	}
 
@@ -57,8 +60,10 @@ private static final Logger logger= Logger.getLogger(RoomsService.class);
 			responseStructure.setStatus(HttpStatus.OK.value());
 			responseStructure.setMessage("Get Rooms");
 			responseStructure.setData(optional.get());
+			logger.debug("rooms found");
 			return responseEntity;
 		}
+		logger.warn("no such id found in database");
 		throw new NoSuchIdFoundException("no such id found in database");
 	}
 
@@ -72,8 +77,10 @@ private static final Logger logger= Logger.getLogger(RoomsService.class);
 			responseStructure.setStatus(HttpStatus.OK.value());
 			responseStructure.setMessage("Rooms Deleted");
 			responseStructure.setData(optional.get());
+			logger.debug("rooms deleted");
 			return responseEntity;
 		}
+		logger.warn("no such id found in database to delete");
 		throw new UnableToDeleteException("no such id found in database to delete");
 	}
 
@@ -86,8 +93,10 @@ private static final Logger logger= Logger.getLogger(RoomsService.class);
 			responseStructure.setStatus(HttpStatus.OK.value());
 			responseStructure.setMessage("Get Rooms");
 			responseStructure.setData(optional);
+			logger.debug("rooms found");
 			return responseEntity;
 		}
+		logger.warn("no such id found in database");
 		throw new NoSuchIdFoundException("no such id found in database");
 	}
 }
