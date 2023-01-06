@@ -3,6 +3,7 @@ package com.ty.pgboot_app.pg_app.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +21,8 @@ public class PGDetailsService {
 
 	@Autowired
 	PGDetailsDao dao;
+	
+	private static final Logger logger = Logger.getLogger(PGDetailsService.class);
 
 	public ResponseEntity<ResponseStructure<PGDetails>> savePGDetails(PGDetails  pgDetails) {
 		ResponseStructure<PGDetails> responseStructure = new ResponseStructure<PGDetails>();
@@ -28,7 +31,9 @@ public class PGDetailsService {
 		responseStructure.setStatus(HttpStatus.CREATED.value());
 		responseStructure.setMessage("Saved");
 		responseStructure.setData(dao.savePGDetails(pgDetails));
+		logger.debug("PG details added to the database");
 		return responseEntity;
+		
 	}
 
 	public ResponseEntity<ResponseStructure<PGDetails>> updatePGDetails(PGDetails pgDetails, int id) {
@@ -41,9 +46,10 @@ public class PGDetailsService {
 			responseStructure.setStatus(HttpStatus.OK.value());
 			responseStructure.setMessage("Updated");
 			responseStructure.setData(dao.updatePGDetails(pgDetails));
-
+			logger.debug("PG details updated in the database");
 			return responseEntity;
 		}
+		logger.warn("no such id found in database to update");
 		throw new UnableToUpdateException();
 	}
 
@@ -56,9 +62,10 @@ public class PGDetailsService {
 			responseStructure.setStatus(HttpStatus.OK.value());
 			responseStructure.setMessage("Retrieved");
 			responseStructure.setData(optional.get());
-
+			logger.debug("PG details retrieved from the database");
 			return responseEntity;
 		}
+		logger.warn("no such id found in database ");
 		throw new NoSuchIdFoundException();
 	}
 
@@ -72,9 +79,10 @@ public class PGDetailsService {
 			responseStructure.setStatus(HttpStatus.OK.value());
 			responseStructure.setMessage("Deleted");
 			responseStructure.setData(optional.get());
-
+			logger.debug("PG details deleted from the database");
 			return responseEntity;
 		}
+		logger.warn("no such id found in database to delete");
 		throw new UnableToDeleteException();
 	}
 
@@ -87,7 +95,7 @@ public class PGDetailsService {
 			responseStructure.setStatus(HttpStatus.OK.value());
 			responseStructure.setMessage("Retrieved");
 			responseStructure.setData(pgDetails);
-
+			logger.debug(" All the PG details retrieved from the database");
 
 			return responseEntity;
 
@@ -102,10 +110,12 @@ public class PGDetailsService {
 			responseStructure.setStatus(HttpStatus.OK.value());
 			responseStructure.setMessage("Retrieved");
 			responseStructure.setData(pg);
-
+			logger.debug("PG details retrieved from the database by location");
 			return responseEntity;
 		}
+		logger.warn("no such location found in the database");
 		throw new NoSuchIdFoundException();
+		
 	}
 	
 }
