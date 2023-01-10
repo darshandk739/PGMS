@@ -21,7 +21,7 @@ public class RoomsDao {
 		return roomsRepository.save(rooms);
 	}
 	
-	public Optional<Rooms> getRoomsById(int id) {
+	public Optional<Rooms> getRoomsById(String id) {
 		return roomsRepository.findById(id);
 
 	}
