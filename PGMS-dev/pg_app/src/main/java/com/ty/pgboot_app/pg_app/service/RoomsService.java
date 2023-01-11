@@ -34,7 +34,7 @@ public class RoomsService {
 		return responseEntity;
 	}
 
-	public ResponseEntity<ResponseStructure<Rooms>> updateRooms(Rooms rooms, int id) {
+	public ResponseEntity<ResponseStructure<Rooms>> updateRooms(Rooms rooms, String id) {
 
 		ResponseStructure<Rooms> responseStructure = new ResponseStructure<Rooms>();
 		ResponseEntity<ResponseStructure<Rooms>> responseEntity = new ResponseEntity<ResponseStructure<Rooms>>(
@@ -52,7 +52,7 @@ public class RoomsService {
 		throw new UnableToUpdateException("no such id found in database to update");
 	}
 
-	public ResponseEntity<ResponseStructure<Rooms>> getRoomsById(int id) {
+	public ResponseEntity<ResponseStructure<Rooms>> getRoomsById(String id) {
 		ResponseStructure<Rooms> responseStructure = new ResponseStructure<Rooms>();
 		ResponseEntity<ResponseStructure<Rooms>> responseEntity = new ResponseEntity<ResponseStructure<Rooms>>(
 				responseStructure, HttpStatus.OK);
@@ -68,7 +68,7 @@ public class RoomsService {
 		throw new NoSuchIdFoundException("no such id found in database");
 	}
 
-	public ResponseEntity<ResponseStructure<Rooms>> deleteRoomsById(int id) {
+	public ResponseEntity<ResponseStructure<Rooms>> deleteRoomsById(String id) {
 		ResponseStructure<Rooms> responseStructure = new ResponseStructure<Rooms>();
 		ResponseEntity<ResponseStructure<Rooms>> responseEntity = new ResponseEntity<ResponseStructure<Rooms>>(
 				responseStructure, HttpStatus.OK);

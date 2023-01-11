@@ -49,7 +49,7 @@ public class RoomsController {
 	@PutMapping(consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE }, produces = {
 			MediaType.APPLICATION_JSON_VALUE })
 
-	public ResponseEntity<ResponseStructure<Rooms>> updateRooms(@Valid @RequestBody Rooms rooms, @RequestParam int id) {
+	public ResponseEntity<ResponseStructure<Rooms>> updateRooms(@Valid @RequestBody Rooms rooms, @RequestParam String id) {
 		return roomService.updateRooms(rooms, id);
 	}
 
@@ -57,7 +57,7 @@ public class RoomsController {
 	@ApiResponses(value = { @ApiResponse(code = 500, message = "Internal Server Error"),
 			@ApiResponse(code = 404, message = "NotFound") })
 	@GetMapping(produces = { MediaType.APPLICATION_JSON_VALUE })
-	public ResponseEntity<ResponseStructure<Rooms>> getRooms(@Valid @RequestParam int id) {
+	public ResponseEntity<ResponseStructure<Rooms>> getRooms(@Valid @RequestParam String id) {
 		return roomService.getRoomsById(id);
 	}
 
@@ -73,7 +73,7 @@ public class RoomsController {
 	@ApiResponses(value = { @ApiResponse(code = 500, message = "Internal Server Error"),
 			@ApiResponse(code = 404, message = "NotFound") })
 	@DeleteMapping(produces = { MediaType.APPLICATION_JSON_VALUE })
-	public ResponseEntity<ResponseStructure<Rooms>> deleteRooms(@Valid @RequestParam int id) {
+	public ResponseEntity<ResponseStructure<Rooms>> deleteRooms(@Valid @RequestParam String id) {
 		return roomService.deleteRoomsById(id);
 	}
 }
