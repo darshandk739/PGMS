@@ -41,6 +41,7 @@ public class PGOwnerController {
 	public ResponseEntity<ResponseStructure<PGOwner>> savePGDetails(@RequestBody @Valid PGOwner pgDetails) {
 		return service.savePGDetails(pgDetails);
 	}
+	//git
 
 	@ApiOperation(value = "Get PGDetails", notes = "It is used to get the PGDetails")
 	@ApiResponses(value = { @ApiResponse(code = 500, message = "Internal server Error"),

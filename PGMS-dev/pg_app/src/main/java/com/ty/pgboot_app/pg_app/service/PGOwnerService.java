@@ -34,7 +34,9 @@ public class PGOwnerService {
 		logger.debug("PG details added to the database");
 		return responseEntity;
 		
+		
 	}
+	//git
 
 	public ResponseEntity<ResponseStructure<PGOwner>> updatePGDetails(PGOwner pgDetails, int id) {
 		Optional<PGOwner> optional = dao.getPGDetailsById(id);

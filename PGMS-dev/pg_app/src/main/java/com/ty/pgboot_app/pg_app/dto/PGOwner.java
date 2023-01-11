@@ -39,7 +39,7 @@ public class PGOwner {
 	private String pgFoods;   
 
 
-	
+	//git
 	
 	@OneToMany(cascade = CascadeType.ALL)
     @JsonIgnore
